@@ -13,7 +13,6 @@ class Root(ScreenManager):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         Window.bind(on_keyboard=self._handle_keyboard)
-        # get screen data from screens.json
         with open(utils.abs_path("screens.json")) as f:
             self.screens_data = json.load(f)
 
@@ -31,20 +30,12 @@ class Root(ScreenManager):
         to be passed to that screen.
         """
 
-        # checks if the screen is already added to the screen-manager
         if not self.has_screen(screen_name):
             screen = self.screens_data[screen_name]
-            # load the kv file (libs/uix/kv/screen_kv_file.kv)
             Builder.load_file(utils.abs_path(screen["kv"]))
-            # import screen class dynamically
-            # (from libs.uix.baseclass.screen_py_file import ScreenObjectName)
             exec(screen["import"])
-            # calls the screen class to get the instance of it
-            # (ScreenObjectName())
             screen_object = eval(screen["object"])
-            # set the screen name using screen_name arg
             screen_object.name = screen_name
-            # add the screen to the screen-manager
             self.add_widget(screen_object)
 
     def push(self, screen_name, side="left"):
@@ -58,10 +49,8 @@ class Root(ScreenManager):
 
         self.load_screen(screen_name)
 
-        # set transition direction
         self.transition.direction = side
 
-        # set current screen
         self.current = screen_name
 
     def push_replacement(self, screen_name, side="left"):
@@ -103,8 +92,6 @@ class Root(ScreenManager):
         elif cur_side == "down":
             side = "up"
 
-        # set transition direction
         self.transition.direction = side
 
-        # set current screen
         self.current = prev_screen["name"]

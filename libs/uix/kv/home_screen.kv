@@ -3,9 +3,21 @@
     BoxLayout:
         orientation: "vertical"
 
-        Label:
-            text: "Current Screen: " + root.name
+        ScrollView:
+            MDList:
+                id: pwlist
 
-        Button:
-            text: "GOTO SETTINGS"
-            on_release: root.manager.push("settings")
+                OneLineAvatarIconListItem:
+                    text: "One-line item with avatar"
+
+                    IconLeftWidget:
+                        icon: "cog"
+
+                    YourContainer:
+                        id: container
+
+                        MDIconButton:
+                            icon: "minus"
+
+                        MDIconButton:
+                            icon: "plus"
