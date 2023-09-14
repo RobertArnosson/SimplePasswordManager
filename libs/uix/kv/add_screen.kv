@@ -1,0 +1,85 @@
+<PasswordTextFieldL>:
+    size_hint_y: None
+    height: text.height
+
+    CredInputPL:
+        id: text
+        icon_left: 'key-variant'
+        theme_icon_color: "Custom"
+        icon_left_color: self.theme_cls.primary_color
+        multiline: False
+        allow_copy: False
+        write_tab: False
+        password: True
+        password_mask: "•"
+        hint_text: "Password"
+        size_hint_x: 1
+        font_style: 'Subtitle1'
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        
+
+    MDIconButton:
+        icon: "eye-off"
+        theme_icon_color: "Custom"
+        icon_color: app.theme_cls.disabled_hint_text_color
+        pos_hint: {"center_y": .5}
+        pos: text.width - self.width + dp(8), 0
+        theme_text_color: "Hint"
+        on_release:
+            self.icon = "eye" if self.icon == "eye-off" else "eye-off"
+            self.icon_color = app.theme_cls.primary_color if self.icon == "eye" else app.theme_cls.disabled_hint_text_color
+            text.password = False if text.password is True else True
+
+<AddScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: dp(16)
+        spacing: dp(16)
+
+        BoxLayout:
+            orientation: 'vertical'
+            padding: dp(16)
+            spacing: dp(16)
+            width: dp(100)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            MDTextField:
+                id: name_field
+                icon_left: 'pound'
+                theme_icon_color: "Custom"
+                multiline: False
+                allow_copy: False
+                write_tab: False
+                hint_text: "Name"
+                size_hint_x: 1
+                font_style: 'Subtitle1'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            MDTextField:
+                id: email_field
+                icon_left: 'email'
+                theme_icon_color: "Custom"
+                multiline: False
+                allow_copy: False
+                write_tab: False
+                hint_text: "Email"
+                size_hint_x: 1
+                font_style: 'Subtitle1'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+            PasswordTextFieldL:
+                id: password_field
+                hint_text: "Password"
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: dp(10)
+
+            MDRaisedButton:
+                text: "Save"
+                on_release: root.add(name_field.text, email_field.text, password_field.ids.text.text)
+
+            MDRaisedButton:
+                text: "Cancel"
+                on_release: root.goto('home', 'right')

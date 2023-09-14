@@ -4,6 +4,16 @@
         "object": "HomeScreen()",
         "kv": "libs/uix/kv/home_screen.kv"
     },
+    "add": {
+        "import": "from libs.uix.baseclass.add_screen import AddScreen",
+        "object": "AddScreen()",
+        "kv": "libs/uix/kv/add_screen.kv"
+    },
+    "edit": {
+        "import": "from libs.uix.baseclass.edit_screen import EditScreen",
+        "object": "EditScreen()",
+        "kv": "libs/uix/kv/edit_screen.kv"
+    },
     "settings": {
         "import": "from libs.uix.baseclass.settings_screen import SettingsScreen",
         "object": "SettingsScreen()",

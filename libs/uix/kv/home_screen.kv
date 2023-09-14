@@ -1,23 +1,14 @@
 <HomeScreen>
 
-    BoxLayout:
+    MDBoxLayout:
         orientation: "vertical"
+        padding: 0, 0, 0, dp(15)
 
         ScrollView:
             MDList:
-                id: pwlist
+                id: item_list
 
-                OneLineAvatarIconListItem:
-                    text: "One-line item with avatar"
-
-                    IconLeftWidget:
-                        icon: "cog"
-
-                    YourContainer:
-                        id: container
-
-                        MDIconButton:
-                            icon: "minus"
-
-                        MDIconButton:
-                            icon: "plus"
+        MDFloatingActionButton:
+            icon: "plus"
+            pos_hint: {"right": 0.95}
+            on_release: root.goto('add')
